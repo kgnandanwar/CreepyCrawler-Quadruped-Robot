@@ -10,10 +10,23 @@
       </material>
     </visual>
   </link>
+	<link name="joint1_visual">
+		<visual>
+			<origin xyz="0.11 0 0" rpy="0 0 1.57"/>
+			<geometry>
+              <cylinder length="0.05" radius="0.01"/>
+				<!--<box size="0.02 0.05 0.02"/>-->
+			</geometry>
+	     	<material name="Blue2">
+				<color rgba="0 0 0.7 1.0"/>
+			</material>
+	   </visual>
+	</link>
+
   
   <link name="offset_link2">
     <visual>
-      <origin xyz="0.1 0 0" rpy="0 0 0"/>
+      <origin xyz="0.12 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.1 0.02 0.02"/>
       </geometry>
@@ -22,9 +35,21 @@
       </material>
     </visual>
    </link>
+	
+	<link name="joint2_visual">
+		<visual>
+			<origin xyz="0.18 0 0" rpy="1.57 0 0"/>
+			<geometry>
+				<cylinder radius="0.01" length="0.05"/>
+			</geometry>
+	     	<material name="Blue2">
+				<color rgba="0 0 0.7 1.0"/>
+			</material>
+	   </visual>
+	</link>
   <link name="link2">
     <visual>
-      <origin xyz="0.15 0 0" rpy="0 0 0"/>
+      <origin xyz="0.19 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="0.1 0.02 0.02"/>
       </geometry>
@@ -35,7 +60,7 @@
   </link>
   <link name="link1">
     <visual>
-      <origin xyz="0.15 0 -0.05" rpy="0 0 0"/>
+      <origin xyz="0.18 0 -0.05" rpy="0 0 0"/>
       <geometry>
         <box size="0.02 0.02 0.1"/>
       </geometry>
@@ -45,16 +70,25 @@
     </visual>
   </link>
  
-
-  <joint name="joint1" type="revolute">
+  <joint name="joint_base" type="fixed">
     <parent link="base_link"/>
+    <child link="joint1_visual"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="joint1" type="revolute">
+    <parent link="joint1_visual"/>
     <child link="offset_link2"/>
     <origin xyz="0.05 0 0" rpy="0 0 0"/>
     <limit lower="-3.146" upper="3.146" effort="10" velocity="3"/>
     <axis xyz="0 0 1"/>
   </joint>
-  <joint name="joint2" type="revolute">
+  <joint name="joint_joint1" type="fixed">
     <parent link="offset_link2"/>
+    <child link="joint2_visual"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <joint name="joint2" type="revolute">
+    <parent link="joint2_visual"/>
     <child link="link2"/>
     <origin xyz="0.05 0 0" rpy="0 0 0"/>
     <limit lower="-3.146" upper="3.146" effort="10" velocity="3"/>
