@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/media/piyush/BlackHole/WPI/Robot Dynamics/Project/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/devel:$CMAKE_PREFIX_PATH"
-export PWD='/media/piyush/BlackHole/WPI/Robot Dynamics/Project/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/build'
-export ROSLISP_PACKAGE_DIRECTORIES="/media/piyush/BlackHole/WPI/Robot Dynamics/Project/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/media/piyush/BlackHole/WPI/Robot Dynamics/Project/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/src:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/krishna/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/devel:$CMAKE_PREFIX_PATH"
+export PWD='/home/krishna/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/build'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/krishna/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/krishna/CreepyCrawler-Quadruped-Robot/ROS/Crawler_ws/src:$ROS_PACKAGE_PATH"
