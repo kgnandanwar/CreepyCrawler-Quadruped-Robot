@@ -1,0 +1,258 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+  <model name="crawler_robot">
+    <static>true</static>
+
+        <link name='chassis'>
+        <pose>0 0 .1 0 0 0</pose>
+        <inertial>
+                <pose>0 0 0 0 0 0</pose>
+                <inertia>
+                    <ixx>0.0</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.01</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.0</izz>
+                </inertia>
+                <mass>1.0</mass>
+            </inertial>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.2 .2 .02</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.2 .21 .02</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='leftback_leg1'>
+        <pose>0.15 -0.1 .1 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </visual>
+
+        </link>
+        <link name='leftback_leg2'>
+        <pose>0.205 -0.10 .05 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='leftfront_leg1'>
+        <pose>0.15 0.10 .1 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='leftfront_leg2'>
+        <pose>0.205 0.10 .05 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='rightfront_leg1'>
+        <pose>-0.15 0.10 .1 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='rightfront_leg2'>
+        <pose>-0.205 0.10 .05 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='rightback_leg1'>
+        <pose>-0.15 -0.10 .1 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.1 .01 .01</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <link name='rightback_leg2'>
+        <pose>-0.205 -0.10 .05 0 0 0</pose>
+
+        <collision name='collision'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </collision>
+
+        <visual name='visual'>
+            <geometry>
+            <box>
+                <size>.01 .01 .1</size>
+            </box>
+            </geometry>
+        </visual>
+        </link>
+        <joint type="revolute" name="leftback_leg1_to_body">
+           <pose>0.15 -0.1 .1 0 0 0</pose>
+           <child>leftback_leg1</child>
+           <parent>chassis</parent>
+           <axis>
+             <xyz>0 0 1</xyz>
+           </axis>
+         </joint>
+         <joint type="revolute" name="leftback_leg1_to_leftback_leg2">
+            <pose>0 0 0 0 0 0</pose>
+            <child>leftback_leg2</child>
+            <parent>leftback_leg1</parent>
+            <axis>
+              <xyz>0 1 0</xyz>
+            </axis>
+          </joint>
+          <joint type="revolute" name="leftfront_leg1_to_body">
+             <pose>0 0 0 0 0 0</pose>
+             <child>leftfront_leg1</child>
+             <parent>chassis</parent>
+             <axis>
+               <xyz>0 0 1</xyz>
+             </axis>
+           </joint>
+           <joint type="revolute" name="leftfront_leg1_to_leftfront_leg2">
+              <pose>0 0 0 0 0 0</pose>
+              <child>leftfront_leg2</child>
+              <parent>leftfront_leg1</parent>
+              <axis>
+                <xyz>0 1 0</xyz>
+              </axis>
+            </joint>
+            <joint type="revolute" name="rightback_leg1_to_body">
+               <pose>0 0 0 0 0 0</pose>
+               <child>rightback_leg1</child>
+               <parent>chassis</parent>
+               <axis>
+                 <xyz>0 0 1</xyz>
+               </axis>
+             </joint>
+             <joint type="revolute" name="rightback_leg1_to_rightback_leg2">
+                <pose>0 0 0 0 0 0</pose>
+                <child>rightback_leg2</child>
+                <parent>rightback_leg1</parent>
+                <axis>
+                  <xyz>0 1 0</xyz>
+                </axis>
+              </joint>
+              <joint type="revolute" name="rightfront_leg1_to_body">
+                 <pose>0 0 0 0 0 0</pose>
+                 <child>rightfront_leg1</child>
+                 <parent>chassis</parent>
+                 <axis>
+                   <xyz>0 0 1</xyz>
+                 </axis>
+               </joint>
+               <joint type="revolute" name="rightfront_leg1_to_rightfront_leg2">
+                  <pose>0 0 0 0 0 0</pose>
+                  <child>rightfront_leg2</child>
+                  <parent>rightfront_leg1</parent>
+                  <axis>
+                    <xyz>0 1 0</xyz>
+                  </axis>
+                </joint>
+
+
+
+  </model>
+</sdf>
