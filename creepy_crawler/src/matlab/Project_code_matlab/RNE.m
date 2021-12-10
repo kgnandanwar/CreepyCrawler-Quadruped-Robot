@@ -84,7 +84,7 @@ F1_swing = adjoint(inv(T12))'*F2 + G1 * Vd1 - ad(V1)' * G1 * V1;
 u1_swing = F1_swing' * A(:,1);
 
 
-%% 
+% %% 
 syms th1 th2 dth1 dth2 ddq ddth1 ddth2
 u1 = subs(u1, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
 u2 = subs(u2, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2 ], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
@@ -92,67 +92,8 @@ u2 = subs(u2, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2),
 u1_swing = subs(u1_swing, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
 u2_swing = subs(u2_swing, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2 ], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
 
-%%______________________________________________________
-% % State Space
-X = sym('X', [4,1]);
-X(1) = th1;
-X(2) = th2;
-X(3) = dth1;
-X(4) = dth2
-
-syms tau1 tau2 tau1_swing tau2_swing
-solution = solve([u1==tau1 u2==tau2],[ddth1 ddth2]);
-solution.ddth1
-solution.ddth2
-
-% solution_swing = solve([u1_swing==tau1_swing u2_swing==tau2_swing],[ddth1 ddth2]);
-
-dX = sym('dX', [4,1]);
-dX(1) = X(3)
-dX(2) = X(4)
-dX(3) = solution.ddth1
-dX(4) = solution.ddth2
-% 
-% % dX_s = sym('dX', [4,1]);
-% % dX_s(1) = X(3);
-% % dX_s(2) = X(4);
-% % dX_s(3) = solution_swing.ddth1;
-% % dX_s(4) = solution_swing.ddth2;
-% 
-% %%______________________________________________________
-% % % Set Point
-% 
-% % Equilibrium Points
-
-sol = solve([dX(1) ==0, dX(2)==0, dX(3)==0, dX(4)==0], [dth1, dth2, th1, th2]);
-sol = solve(sol, [tau1, tau2],[0,0])
-dth1_Sol = sol.dth1
-dth2_Sol = sol.dth2
-th1_Sol = sol.th1
-th2_Sol = sol.th2
-
-% 
-% % dX = [dX(1); dX(2); dX(3); dX(4)];
-% % X = [th1; th2; dth1; dth2];
-% % u = [tau1; tau2];
-% % 
-% % % LINEARIZATION
-% % A = jacobian(dX,X);
-% % B = jacobian(dX, [u]);
-% % 
-% % A = subs(A,[th1, th2, dth1, dth2],[th1_Sol, th2_Sol, dth1_Sol, dth2_Sol]);
-% % B = subs(B,[th1, th2, dth1, dth2],[th1_Sol, th2_Sol, dth1_Sol, dth2_Sol]);
-% % 
-% % A = double(A)
-% % B = double(B)
-% % 
-% % % STABILITY
-% % eigA = eig(A);
-% 
-% 
-% 
-% 
-% % _________________________________________________________
+fprintf("u1: %s\n", u1)
+fprintf("u2: %s\n", u2)
 
 function AdT = adjoint(T)
     R = T(1:3,1:3);
