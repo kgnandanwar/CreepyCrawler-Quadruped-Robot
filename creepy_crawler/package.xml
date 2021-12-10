@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>creepy_crawler</name>
+  <version>1.0.0</version>
+  <description>The creepy_crawler package</description>
+
+  <maintainer email="rdeshmukh@wpi.edu">Rushikesh Deshmukh</maintainer>
+  <license>BSD</license>
+
+  <author email="rdeshmukh@wpi.edu">Rushikesh Deshmukh</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_export_depend>gazebo_ros</build_export_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rqt_gui</exec_depend>
+  <exec_depend>effort_controllers</exec_depend>
+
+  <exec_depend>rviz</exec_depend>
+  <export>
+    <!-- gazebo_ros_paths_plugin automatically adds these to
+        GAZEBO_PLUGIN_PATH and GAZEBO_MODEL_PATH when you do this export inside
+        the package.xml file. You can than use URIs of type model://my_package/stuff. -->
+    <gazebo_ros                                                                 
+        gazebo_model_path="$(find creepy_crawler)/models" /> 
+  </export>
+</package>
