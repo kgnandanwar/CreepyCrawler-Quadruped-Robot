@@ -9,7 +9,8 @@ L1 = 0.1; % [m] Length of the first link
 L2 = 0.1; % [m] Length of the second link
 m1 = 1;   % [kg] Mass of the first link
 m2 = 1;   % [kg] Mass of the second link
-g = -9.8;  % [m/s2] Gravity acceleration (aligned with the Y axis)
+g = -9.8;
+% g = 9.8;  % [m/s2] Gravity acceleration (aligned with the Y axis)
 % syms L1 L2
 %% *** STEP 1 ***
 % Calculate the home configurations of each link, expressed in the space frame                
@@ -39,21 +40,21 @@ Vd2 = zeros(6,1);
  
 % Initialize the joint positions and velocities
 syms q [1 2]
-syms qd [1 2]
-syms qdd [1 2]
+syms dq [1 2]
+syms ddq [1 2]
 
 %% *** STEP 2 ***
 V0 = zeros(6,1);
 Vd0 = [0 0 0 0 0 -g].'; 
 % Forward Iteration - First Link
 T01 = fkine(A(:,1), M01, q(1), 'space');
-V1 = adjoint(inv(T01)) * V0 + A(:,1) *qd(1); % Link Velocity
-Vd1 = adjoint(inv(T01)) * Vd0 + ad(V1) * A(:,1) * qd(1) + A(:,1) * qdd(1); % Link Acceleration
+V1 = adjoint(inv(T01)) * V0 + A(:,1) *dq(1); % Link Velocity
+Vd1 = adjoint(inv(T01)) * Vd0 + ad(V1) * A(:,1) * dq(1) + A(:,1) * ddq(1); % Link Acceleration
      
 % Forward Iteration - Second Link
 T12 = fkine(A(:,2), M12, q(2), 'space');
-V2 =  adjoint(inv(T12)) * V1 + A(:,2) * qd(2); % Link Velocity
-Vd2 = adjoint(inv(T12)) * Vd1 + ad(V2) * A(:,2) * qd(2) + A(:,2) * qdd(2); % Link Acceleration
+V2 =  adjoint(inv(T12)) * V1 + A(:,2) * dq(2); % Link Velocity
+Vd2 = adjoint(inv(T12)) * Vd1 + ad(V2) * A(:,2) * dq(2) + A(:,2) * ddq(2); % Link Acceleration
 
 %% Step 2: Initialize the Spatial Inertia Matrices
 
@@ -83,23 +84,26 @@ u2_swing = F2_swing' * A(:,2);
 F1_swing = adjoint(inv(T12))'*F2 + G1 * Vd1 - ad(V1)' * G1 * V1;
 u1_swing = F1_swing' * A(:,1);
 
+syms theta1_ddot theta2_ddot theta1_dot theta2_dot theta1 theta2
 
-% %% 
-syms th1 th2 dth1 dth2 ddq ddth1 ddth2
-u1 = subs(u1, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
-u2 = subs(u2, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2 ], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
+u1 = subs(u1, [conj(ddq1), conj(ddq2), conj(dq1), conj(dq2), conj(q1), conj(q2), ddq1, ddq2, dq1, dq2, q1, q2], [theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2, theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2]);
+u2 = subs(u2, [conj(ddq1), conj(ddq2), conj(dq1), conj(dq2), conj(q1), conj(q2), ddq1, ddq2, dq1, dq2, q1, q2], [theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2, theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2]);
 
-u1_swing = subs(u1_swing, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
-u2_swing = subs(u2_swing, [conj(qdd1), conj(qdd2), conj(qd1), conj(qd2), conj(q1), conj(q2), qdd1, qdd2, qd1, qd2, q1, q2 ], [ddth1, ddth2, dth1, dth2, th1, th2, ddth1, ddth2, dth1, dth2, th1, th2]);
+u1_swing = subs(u1_swing, [conj(ddq1), conj(ddq2), conj(dq1), conj(dq2), conj(q1), conj(q2), ddq1, ddq2, dq1, dq2, q1, q2], [theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2, theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2]);
+u2_swing = subs(u2_swing, [conj(ddq1), conj(ddq2), conj(dq1), conj(dq2), conj(q1), conj(q2), ddq1, ddq2, dq1, dq2, q1, q2], [theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2, theta1_ddot, theta2_ddot, theta1_dot, theta2_dot, theta1, theta2]);
 
-fprintf("u1: %s\n", u1)
-fprintf("u2: %s\n", u2)
+fprintf("u1= %s\n", u1)
+fprintf("u2= %s\n", u2)
+
+fprintf("u1_swing= %s\n", u1_swing)
+fprintf("u2_swing= %s\n", u2_swing)
 
 function AdT = adjoint(T)
     R = T(1:3,1:3);
     p = T(1:3,4);
     AdT = [R zeros(3); skew(p)*R R];
 end
+
 function I = Inertia_box(m,h,w,l)
     Ixx = m * (w^2 + h^2)/12;
     Iyy = m * (l^2 + h^2)/12;
