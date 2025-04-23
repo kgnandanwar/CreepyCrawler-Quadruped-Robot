@@ -3,7 +3,7 @@ Quadruped robots have been of interest to the robotics community as they have hi
 
 # Creepy_Crawler
 
-* Author: Rushikesh Deshmukh  <rdeshmukh@wpi.edu>
+* Author: Kunal Nandanwar  <kgnandanwar@wpi.edu>
 * License: GNU General Public License, version 3 (GPL-3.0)
 
 Example robots and code for interfacing Gazebo with ROS
